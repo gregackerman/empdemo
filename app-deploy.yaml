@@ -1,0 +1,65 @@
+apiVersion: appsody.dev/v1beta1
+kind: AppsodyApplication
+metadata:
+  annotations:
+    /architecture: x86_64
+    /authoritative-source-url: registry.access.redhat.com
+    /build-date: 2019-07-23T16:20:54.720447
+    /description: This image contains the Kabanero development stack for the java-microprofile
+      collection
+    /distribution-scope: public
+    /maintainer: Red Hat, Inc.
+    /name: kabanero/java-microprofile
+    /release: "154"
+    /summary: Image for Kabanero java-microprofile development
+    /url: https://access.redhat.com/containers/#/registry.access.redhat.com/ubi8/images/8.0-154
+    /vcs-ref: b80158ff460c2cd8958e35c55b0c7f50ca17638e
+    /vcs-type: git
+    /vendor: Kabanero
+    /version: 0.2.10
+    image.opencontainers.org/created: "2019-11-01T17:01:23-04:00"
+    k8s.io/description: The Universal Base Image is designed and engineered to be
+      the base layer for all of your containerized applications, middleware and utilities.
+      This base image is freely redistributable, but Red Hat only supports Red Hat
+      technologies through subscriptions for Red Hat products. This image is maintained
+      by Red Hat and updated regularly.
+    k8s.io/display-name: Red Hat Universal Base Image 8
+    openshift.io/expose-services: ""
+    openshift.io/tags: base rhel8
+    redhat.com/build-host: cpt-1006.osbs.prod.upshift.rdu2.redhat.com
+    redhat.com/component: ubi8-container
+    redhat.com/license_terms: https://www.redhat.com/en/about/red-hat-end-user-license-agreements#UBI
+    stack.appsody.dev/configured: kabanero/java-microprofile:0.2
+    stack.appsody.dev/created: 2019-11-01T11:32:20+0000
+    stack.appsody.dev/revision: 7e1b69440b425ce8599b56fdc7d47d844c45ae9b
+    stack.appsody.dev/tag: kabanero/java-microprofile:0.2.18
+  labels:
+    image.opencontainers.org/title: emp1
+    stack.appsody.dev/version: 0.2.18
+  name: emp1
+  namespace: pttf
+spec:
+  applicationImage: dev.local/emp1
+  createKnativeService: false
+  expose: true
+  livenessProbe:
+    failureThreshold: 12
+    httpGet:
+      path: /health/live
+      port: 9080
+    initialDelaySeconds: 5
+    periodSeconds: 2
+  readinessProbe:
+    failureThreshold: 12
+    httpGet:
+      path: /health/ready
+      port: 9080
+    initialDelaySeconds: 5
+    periodSeconds: 2
+  service:
+    annotations:
+      prometheus.io/scrape: "true"
+    port: 9080
+    type: NodePort
+  stack: java-microprofile
+  version: 1.0.0
